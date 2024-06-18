@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFF;
+
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        .header-description {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            color: #F4F4F4;
+        }
+
+        .header-bar {
+            background-color: #000;
+            height: 2px;
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .movie-card {
+            width: 300px;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            background: gold;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-info h2 {
+            margin-bottom: 10px;
+        }
+
+        .movie-info p {
+            margin-bottom: 15px;
+        }
+
+        .watch-trailer-link {
+            display: block;
+            text-align: center;
+            color: #DC143C;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+	    
+        }
+	
+	footer,a{
+	text-decoration: none;
+	color: #fff;
+	}
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .site-description {
+            margin: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+	<img src="C:\Users\91733\Downloads\logo (1).png" alt="blank" style="height: 40px; margin-right: 10px;"> 
+       <h1>	
+            Movie Recommendations
+  </h1>
+	
+        <div class="header-description">
+            Explore a curated list of movies from Hollywood, Bollywood,Kollywood, Tollywood, and Sandalwood. Find your next cinematic adventure!
+        </div>
+        <div class="header-bar"></div>
+    </header>
+
+    <div class="movie-container" id="movieContainer"></div>
+ 
+    
+
+    <footer>
+        &copy; 2023 Movie Recommendations
+      <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank">Instagram |</a>
+        <a href="https://www.facebook.com/" target="_blank">Facebook |</a>
+        <a href="https://twitter.com/" target="_blank">Twitter</a>
+        <!-- Add more social media links as needed -->
+    </div>
+
+    </footer>
+
+    <script>
+        const movies = [
+            // Hollywood Movies
+            {
+                title: 'Inception',
+                poster: 'https://m.media-amazon.com/images/I/71thFiIUSpL._AC_UF1000,1000_QL80_.jpg',
+                description: 'Inception is a mind-bending science fiction thriller directed by Christopher Nolan. The film explores the concept of dreams and features a stellar cast.',
+                trailer: 'https://www.youtube.com/watch?v=YoHD9XEInc0',
+            },
+            {
+                title: 'The Shawshank Redemption',
+                poster: 'https://images.jdmagicbox.com/comp/jd_social/news/2018jul21/image-119206-zkypi64x2m.jpg',
+                description: 'The Shawshank Redemption is a powerful drama film based on the novella by Stephen King. .',
+                trailer: 'https://www.youtube.com/watch?v=6hB3S9bIaco',
+            },
+            {
+                title: 'The Dark Knight',
+                poster: 'https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg',
+                description: 'The Dark Knight is an iconic superhero film directed by Christopher Nolan. It is the second installment in Nolan\'s Batman trilogy and features Heath Ledger as the Joker.',
+                trailer: 'https://www.youtube.com/watch?v=kmJLuwP3MbY',
+            },
+            {
+                title: 'The Avengers',
+                poster: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8815512_p_v8_ax.jpg',
+                description: 'Earth\'s mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.',
+                trailer: 'https://www.youtube.com/watch?v=eOrNdBpGMv8',
+            },
+            {
+                title: 'Forrest Gump',
+                poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-DADffjQ8sTg5Sdn4_bz-PcIy6lQRkkKpVQ&usqp=CAU',
+                description: 'Forrest Gump is a heartwarming film that follows the life of a man with a low IQ, played by Tom Hanks. The movie explores historical events and themes of love and destiny.',
+                trailer: 'https://www.youtube.com/watch?v=bLvqoHBptjg',
+            },
+            // Kollywood Movies
+             {
+                title: 'Leo',
+                poster: 'https://assets.gadgets360cdn.com/pricee/assets/product/202303/Leo_1678967552.jpg',
+                trailer: 'https://www.youtube.com/watch?v=Po3jStA673E',
+                description: 'Leo, a captivating Kollywood drama, unfolds the journey of a young man as he navigates through love, friendship, and life\'s challenges.'
+            },
+        
+            {
+                title: 'Kaithi',
+                poster: 'https://e1.pxfuel.com/desktop-wallpaper/1019/97/desktop-wallpaper-kaithi-movie-kaithi.jpg', // Replace with actual Kollywood movie poster URL
+                description: 'Kaithi is an action thriller film directed by Lokesh Kanagaraj. The story revolves around a prisoner on the run and a police officer trying to stop him.',
+                trailer: 'https://www.youtube.com/watch?v=YoHD9XEInc0',
+            },
+            {
+                title: 'Vikram Vedha',
+                poster: 'https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/vikram-vedha-et00053838-26-10-2020-01-59-35.jpg',
+                description: 'Vikram Vedha is a crime thriller film starring Madhavan and Vijay Sethupathi. The movie explores the conflict between a police officer and a notorious gangster.',
+                trailer: 'https://www.youtube.com/watch?v=6hB3S9bIaco',
+            },
+            {
+                title: 'Super Deluxe',
+                poster: 'https://play-lh.googleusercontent.com/06-hBQDB2Ca6im8wST5gs_XVZ4v28AP48fTNATwDmvru_wNnsiD1HGevP1MYRJQCPr0UppacwTR_88lIUqlv',
+                description: 'Super Deluxe is an anthology film with intersecting stories directed by Thiagarajan Kumararaja. The movie explores various aspects of human nature and society.',
+                trailer: 'https://www.youtube.com/watch?v=kmJLuwP3MbY',
+            },
+            {
+                title: 'Vada Chennai',
+                poster: 'https://m.media-amazon.com/images/S/pv-target-images/88df90537821ac4ee9530814fff1056772f83f68a776995d13aa57cf825b6252.jpg',
+                description: 'Vada Chennai is a crime drama film directed by Vetrimaaran. The narrative spans multiple decades and follows the lives of characters in North Chennai.',
+                trailer: 'https://www.youtube.com/watch?v=s7EdQ4FqbhY',
+            },
+            // Tollywood Movies
+            {
+                title: 'Jawan (2023)',
+                poster: 'https://i.pinimg.com/originals/c9/76/79/c9767955c100a84269e6b92212fbb7c5.jpg',
+                trailer: 'https://www.youtube.com/watch?v=k8YiqM0Y-78',
+                description: 'Jawan, an action-packed thriller, follows the story of a dedicated soldier who faces internal and external challenges to protect the nation.'
+            },
+             {
+                title: 'Raazi',
+                poster: 'https://stat5.bollywoodhungama.in/wp-content/uploads/2017/06/Raazi-7-306x393.jpg',
+                trailer: 'https://www.youtube.com/watch?v=YjMSttRJrhA',
+                description: 'A Kashmiri woman agrees to marry a Pakistani army officer in order to spy on Pakistan during the Indo-Pakistan War of 1971.'
+            },
+            {
+                title: 'Baahubali: The Beginning',
+                poster: 'https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/baahubali-the-beginning-part-i-et00016239-05-11-2020-07-00-44.jpg',
+                description: 'Baahubali: The Beginning is an epic historical fiction film directed by S. S. Rajamouli. The story revolves around the rise of a young warrior destined for greatness.',
+                trailer: 'https://www.youtube.com/watch?v=sOEg_YZQsTI',
+            },
+            {
+                title: 'Baahubali: The Conclusion',
+                poster: 'https://i.pinimg.com/474x/06/c7/8e/06c78e1a3bda1275e15b5b5cc5deae97.jpg',
+                description: 'Baahubali: The Conclusion is the second part of the Baahubali series, continuing the epic saga of love, betrayal, and power.',
+                trailer: 'https://www.youtube.com/watch?v=G62HrubdD6o',
+            },
+            {
+                title: 'Jersey',
+                poster: 'https://e1.pxfuel.com/desktop-wallpaper/231/403/desktop-wallpaper-nani-s-jersey-movie-super-posters.jpg',
+                description: 'Jersey is a sports drama film starring Nani. The story revolves around a talented cricketer who decides to pursue his passion despite facing challenges.',
+                trailer: 'https://www.youtube.com/watch?v=dz_WVqVvVes',
+            },
+            {
+                title: 'Ala Vaikunthapurramuloo ',
+                poster: 'https://www.telugu360.com/wp-content/uploads/2019/09/ALa-Vaikuntapuram-lo-1.jpg',
+                description: 'Fate plays a vital role in connecting the life of Bantu, a son who seeks validation from his cold-hearted father with the life of Raj, whose millionaire father wishes that he was more assertive.',
+                trailer: 'https://www.youtube.com/watch?v=rvzWljqIRyU',
+            },
+            // Sandalwood Movies
+            {
+                title: 'KGF Chapter 1',
+                poster: 'https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p16345736_v_v8_ad.jpg',
+                description:'In the 1970s, a gangster named Rocky goes undercover as a slave to assassinate the owner of a notorious gold mine.',
+                trailer: 'https://www.youtube.com/watch?v=2v6bn3bHmCk',
+            
+            },
+            {
+                title: 'Tagaru',
+                poster: 'https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/tagaru-et00049201-22-10-2020-04-34-02.jpg',
+                description: 'Tagaru is a crime drama film directed by Duniya Soori. The movie explores the dark and gritty underworld of crime and corruption.',
+                trailer: 'https://www.youtube.com/watch?v=1o6ZsNjG3o0',
+            },
+            {
+                title: 'Kantara',
+                poster: 'https://reelcinemas.com//MovieImages/HO00003194.jpg',
+                description: 'When greed paves the way for betrayal,scheming and murder,a young tribal reluctantly dons the traditions of his ancestors.',
+                trailer: 'https://www.youtube.com/watch?v=8mrVmf239GU',
+            },
+            {
+                title: 'Lucia',
+                poster: 'https://sund-images.sunnxt.com/7879/250x375_Lucia_7879_18b9da83-a245-42e7-ab91-ec6a6c90418d.jpg',
+                description: 'Lucia is a psychological thriller film directed by Pawan Kumar. The movie explores the blurred lines between dreams and reality.',
+                trailer: 'https://www.youtube.com/watch?v=fnM02HVFRao',
+            },
+        ];
+
+        function createMovieCard(movie) {
+            const movieCard = document.createElement('div');
+            movieCard.className = 'movie-card';
+
+            const poster = document.createElement('img');
+            poster.src = movie.poster;
+            poster.alt = `${movie.title} Poster`;
+
+            const movieInfo = document.createElement('div');
+            movieInfo.className = 'movie-info';
+            movieInfo.innerHTML = `<h2>${movie.title}</h2><p>${movie.description}</p>`;
+
+            const trailerLink = document.createElement('a');
+            trailerLink.href = movie.trailer;
+            trailerLink.target = '_blank';
+            trailerLink.className = 'watch-trailer-link';
+            trailerLink.textContent = 'Watch Trailer';
+
+            movieInfo.appendChild(trailerLink);
+
+            movieCard.appendChild(poster);
+            movieCard.appendChild(movieInfo);
+
+            return movieCard;
+        }
+
+        function displayMovies() {
+            const movieContainer = document.getElementById('movieContainer');
+            movies.forEach((movie) => {
+                const movieCard = createMovieCard(movie);
+                movieContainer.appendChild(movieCard);
+            });
+        }
+
+        window.onload = displayMovies;
+    </script>
+</body>
+</html>
