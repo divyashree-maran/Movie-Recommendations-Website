@@ -6,5 +6,5 @@ Features
 - Includes movie posters, descriptions, and links to watch trailers.
 - User-friendly interface with responsive design.
 
-Prerequisites 
+Prerequisites:
 To run this project, you need a modern web browser that supports HTML, CSS, and JavaScript.
